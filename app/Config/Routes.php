@@ -35,5 +35,9 @@ $routes->get('history', 'TransaksiController::history', ['filter' => 'auth']);
 $routes->get('ajax/destinations','TransaksiController::destinations', ['filter' => 'auth']);
 $routes->get('ajax/costs','TransaksiController::costs', ['filter' => 'auth']);
 
+$routes->resource('api/products', ['controller' => 'Api\ProdukController']);
+
+$routes->get('api/transactions', 'Api\TransaksiController::index');
+
 $routes->get('keranjang', 'TransaksiController::index', ['filter' => 'auth']);
 $routes->get('/contact', 'ContactController::index', ['filter' => 'auth']);
