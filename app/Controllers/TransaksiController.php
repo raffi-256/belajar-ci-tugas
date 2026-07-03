@@ -103,6 +103,14 @@ public function checkout()
 }
 public function destinations()
 {
+    $search = $this->request->getGet('q');
+
+    if (empty($search)) {
+        return $this->response->setJSON([
+            'results' => []
+        ]);
+    }
+
     $service = new RajaOngkirService();
 $response = $service->getDestination($search);
 
