@@ -29,7 +29,7 @@
 </div> 
 <div class="col-12"> 
     <?= form_label('Kelurahan', 'kelurahan', ['class' => 'form-label']) ?>
-    <strong>select kelurahan</strong>
+    <?= form_dropdown('kelurahan', [], '', ['id' => 'kelurahan', 'class' => 'form-control']) ?>
 </div>
 
 <div class="col-12"> 
@@ -125,7 +125,7 @@ function hitungTotal() {
     cache: true
 }
 	});
-});
+
 $("#kelurahan").on('change', function () {
     let id_kelurahan = $(this).val();
 
@@ -148,6 +148,7 @@ $("#kelurahan").on('change', function () {
             );
         });
     }
+});
 });
 $("#layanan").on('change', function() {
     ongkir = parseInt($(this).val());
