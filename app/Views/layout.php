@@ -88,6 +88,7 @@ if(uri_string()!=""){
   <script src="<?= base_url('NiceAdmin/assets/vendor/tinymce/tinymce.min.js') ?>"></script>
   <script src="<?= base_url('NiceAdmin/assets/vendor/php-email-form/validate.js') ?>"></script>
 
+  <?= $this->renderSection('script') ?>
   <script src="<?= base_url('NiceAdmin/assets/js/main.js') ?>"></script>
 
 </body>
