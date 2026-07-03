@@ -19,6 +19,8 @@ public function __construct()
 {
     helper(['number', 'form']);
     $this->cart = service('cart');
+    $this->transactionModel = new TransactionModel();
+$this->transactionDetailModel = new TransactionDetailModel(); 
 }
 
     public function index()
