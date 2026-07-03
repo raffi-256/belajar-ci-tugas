@@ -6,13 +6,13 @@ use CodeIgniter\Model;
 
 class TransactionDetailModel extends Model
 {
-    protected $table            = 'transactiondetails';
+    protected $table            = 'transaction_detail'; //disesuaikan
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
-    protected $useSoftDeletes   = false;
+    protected $useSoftDeletes   = true; //disesuaikan
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['transaction_id', 'product_id', 'jumlah', 'diskon', 'subtotal_harga']; //disesuaikan
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -21,7 +21,7 @@ class TransactionDetailModel extends Model
     protected array $castHandlers = [];
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true; //disesuaikan
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
@@ -30,7 +30,7 @@ class TransactionDetailModel extends Model
     // Validation
     protected $validationRules      = [];
     protected $validationMessages   = [];
-    protected $skipValidation       = false;
+    protected $skipValidation       = true; //disesuaikan
     protected $cleanValidationRules = true;
 
     // Callbacks
@@ -43,4 +43,24 @@ class TransactionDetailModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function getProductsByTransactionIds(array $transactionIds)
+{
+    if (empty($transactionIds)) {
+        return [];
+    }
+
+    $details = $this->select('transaction_detail.*, product.nama, product.harga, product.foto')
+        ->join('product', 'transaction_detail.product_id = product.id')
+        ->whereIn('transaction_id', $transactionIds)
+        ->findAll();
+
+    $products = [];
+
+    foreach ($details as $detail) {
+        $products[$detail['transaction_id']][] = $detail;
+    }
+
+    return $products;
+}
 }
