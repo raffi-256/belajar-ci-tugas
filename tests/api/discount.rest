@@ -1,0 +1,41 @@
+@baseUrl = http://localhost:8080
+@token = my-secret-token
+@discountId = 1
+
+
+### index
+GET {{baseUrl}}/api/discounts?page=1&per_page=5
+Accept: application/json
+
+
+
+### show
+GET {{baseUrl}}/api/discounts/{{discountId}}
+Accept: application/json
+
+
+### create
+POST {{baseUrl}}/api/discounts
+Accept: application/json
+Content-Type: application/json
+
+{
+    "tanggal": "2026-07-15",
+    "nominal": 100000
+}
+
+
+### update
+PUT {{baseUrl}}/api/discounts/{{discountId}}
+Accept: application/json
+Content-Type: application/json
+
+{
+    "tanggal": "2026-07-15",
+    "nominal": 150000
+}
+
+
+### delete
+DELETE {{baseUrl}}/api/discounts/{{discountId}}
+Accept: application/json
